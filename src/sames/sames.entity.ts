@@ -1,9 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger/dist/decorators";
-import { Same } from "src/sames/sames.entity";
+import { Place } from "src/places/places.entity";
 
 @Entity()
-export class Place {
+export class Same {
   @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
   @PrimaryGeneratedColumn()
   id: number;
@@ -32,6 +32,6 @@ export class Place {
   @Column({ type: 'float', default: 0.0 })
   longitude: number;
 
-  @OneToMany(() => Same, (same) => same.place)
-  sames: Same[];
+  @ManyToOne(() => Place, (place) => place.sames, { cascade: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  place: Place;
 }

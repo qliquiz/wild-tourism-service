@@ -1,8 +1,10 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { PlacesModule } from './places/places.module';
+import { SamesModule } from './sames/sames.module';
+import { Module } from '@nestjs/common';
 import { Place } from './places/places.entity';
+import { Same } from './sames/sames.entity';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { Place } from './places/places.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Place],
+      entities: [Place, Same],
       synchronize: true
     }),
-    PlacesModule
+    PlacesModule,
+    SamesModule
   ]
 })
 export class AppModule {}

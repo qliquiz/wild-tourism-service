@@ -13,15 +13,9 @@ export class PlaceDTO {
   @ApiProperty({ example: 'camping', description: 'Категория' })
   readonly category: string;
 
-  @ApiProperty({ example: '104.27810668945312', description: 'Координаты левого края' })
-  readonly left: number;
+  @ApiProperty({ example: '101.101101', description: 'Широта' })
+  readonly latitude: number;
 
-  @ApiProperty({ example: '52.054179425297164', description: 'Координаты верхнего края' })
-  readonly top: number;
-  
-  @ApiProperty({ example: '105.51132202148436', description: 'Координаты левого края' })
-  readonly right: number;
-
-  @ApiProperty({ example: '51.7151177895987', description: 'Координаты нижнего  края' })
-  readonly bottom: number;
+  @ApiProperty({ example: '101.101101', description: 'Долгота' })
+  readonly longitude: number;
 }
