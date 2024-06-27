@@ -3,7 +3,7 @@ import { ApiProperty } from "@nestjs/swagger/dist/decorators";
 import { Place } from "src/places/places.entity";
 
 @Entity()
-export class Same {
+export class SamePlace {
   @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
   @PrimaryGeneratedColumn()
   id: number;

@@ -1,32 +1,32 @@
 import { Controller, Get, Post, Body, Delete, Query, Put, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express/multer/interceptors/file-fields.interceptor';
-import { SamesService } from './sames.service';
+import { SamePlacesService } from './sames.service';
 import { PlaceDTO } from 'src/places/places.dto';
-import { Same } from './sames.entity';
+import { SamePlace } from './sames.entity';
 
 @Controller('sames')
-export class SamesController {
-  constructor(private readonly samesService: SamesService) {}
+export class SamePlacesController {
+  constructor(private readonly samesService: SamePlacesService) {}
 
   @Post()
   @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 10 }]))
-  create(@UploadedFiles() files: { photos?: Express.Multer.File[] }, @Body() dto: PlaceDTO): Promise<Same> {
+  create(@UploadedFiles() files: { photos?: Express.Multer.File[] }, @Body() dto: PlaceDTO): Promise<SamePlace> {
     if (files.photos) dto.photos = files.photos.map(file => file.filename);
     return this.samesService.create(dto);
   }
 
   @Get()
-  getAll(): Promise<Same[]> {
+  getAll(): Promise<SamePlace[]> {
     return this.samesService.getAll();
   }
 
   @Get()
-  get(@Query('id') id: string): Promise<Same> {
+  get(@Query('id') id: string): Promise<SamePlace> {
     return this.samesService.get(+id);
   }
 
   @Put()
-  update(@Query('id') id: string, @Body() dto: PlaceDTO): Promise<Same> {
+  update(@Query('id') id: string, @Body() dto: PlaceDTO): Promise<SamePlace> {
     return this.samesService.update(+id, dto);
   }
 

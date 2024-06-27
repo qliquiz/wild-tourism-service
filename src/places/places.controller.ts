@@ -3,7 +3,7 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express/multer/intercept
 import { PlacesService } from './places.service';
 import { PlaceDTO } from './places.dto';
 import { Place } from './places.entity';
-import { Same } from 'src/sames/sames.entity';
+import { SamePlace } from 'src/sames/sames.entity';
 
 @Controller('places')
 export class PlacesController {
@@ -11,7 +11,7 @@ export class PlacesController {
 
   @Post()
   @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 10 }]))
-  create(@UploadedFiles() files: { photos?: Express.Multer.File[] }, @Body() dto: PlaceDTO): Promise<Place | Same> {
+  create(@UploadedFiles() files: { photos?: Express.Multer.File[] }, @Body() dto: PlaceDTO): Promise<Place | SamePlace> {
     if (files.photos) dto.photos = files.photos.map(file => file.filename);
     return this.placesService.create(dto);
   }

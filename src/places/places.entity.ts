@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger/dist/decorators";
-import { Same } from "src/sames/sames.entity";
+import { SamePlace } from "src/sames/sames.entity";
 
 @Entity()
 export class Place {
@@ -36,6 +36,6 @@ export class Place {
   @Column({ default: false })
   isChecked: boolean;
 
-  @OneToMany(() => Same, (same) => same.place)
-  sames: Same[];
+  @OneToMany(() => SamePlace, (same) => same.place)
+  sames: SamePlace[];
 }

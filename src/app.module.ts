@@ -1,10 +1,10 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { PlacesModule } from './places/places.module';
-import { SamesModule } from './sames/sames.module';
+import { SamePlacesModule } from './sames/sames.module';
 import { Module } from '@nestjs/common';
 import { Place } from './places/places.entity';
-import { Same } from './sames/sames.entity';
+import { SamePlace } from './sames/sames.entity';
 
 @Module({
   imports: [
@@ -18,11 +18,11 @@ import { Same } from './sames/sames.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Place, Same],
+      entities: [Place, SamePlace],
       synchronize: true
     }),
     PlacesModule,
-    SamesModule
+    SamePlacesModule
   ]
 })
 export class AppModule {}

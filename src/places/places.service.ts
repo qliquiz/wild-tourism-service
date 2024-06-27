@@ -1,21 +1,21 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { SamesService } from 'src/sames/sames.service';
+import { SamePlacesService } from 'src/sames/sames.service';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { PlaceDTO } from './places.dto';
 import { Between } from 'typeorm';
 import { Place } from './places.entity';
-import { Same } from 'src/sames/sames.entity';
+import { SamePlace } from 'src/sames/sames.entity';
 
 @Injectable()
 export class PlacesService {
   constructor(
-    private samesService: SamesService,
+    private samesService: SamePlacesService,
     @InjectRepository(Place)
     private placesRepository: Repository<Place>
   ) {}
 
-  async create(dto: PlaceDTO): Promise<Place | Same> {
+  async create(dto: PlaceDTO): Promise<Place | SamePlace> {
     const samePlace: Place = await this.placesRepository.findOne({
       where: {
         category: dto.category,

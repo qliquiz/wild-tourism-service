@@ -2,29 +2,29 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { PlaceDTO } from 'src/places/places.dto';
-import { Same } from './sames.entity';
+import { SamePlace } from './sames.entity';
 
 @Injectable()
-export class SamesService {
+export class SamePlacesService {
   constructor(
-    @InjectRepository(Same)
-    private samesRepository: Repository<Same>
+    @InjectRepository(SamePlace)
+    private samesRepository: Repository<SamePlace>
   ) {}
 
-  async create(dto: PlaceDTO): Promise<Same> {
-    const newSame = this.samesRepository.create(dto);
-    return await this.samesRepository.save(newSame);
+  async create(dto: PlaceDTO): Promise<SamePlace> {
+    const newSamePlace = this.samesRepository.create(dto);
+    return await this.samesRepository.save(newSamePlace);
   }
 
-  async getAll(): Promise<Same[]> {
+  async getAll(): Promise<SamePlace[]> {
     return await this.samesRepository.find();
   }
 
-  async get(id: number): Promise<Same> {
+  async get(id: number): Promise<SamePlace> {
     return await this.samesRepository.findOneBy({ id });
   }
 
-  async update(id: number, dto: PlaceDTO): Promise<Same> {
+  async update(id: number, dto: PlaceDTO): Promise<SamePlace> {
     await this.samesRepository.update(id, dto);
     return await this.samesRepository.save({ id });
   }

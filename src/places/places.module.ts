@@ -1,14 +1,14 @@
 import { PlacesController } from './places.controller';
 import { PlacesService } from './places.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SamesService } from 'src/sames/sames.service';
+import { SamePlacesService } from 'src/sames/sames.service';
 import { Module } from '@nestjs/common';
 import { Place } from './places.entity';
-import { Same } from 'src/sames/sames.entity';
+import { SamePlace } from 'src/sames/sames.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Place, Same])],
+    imports: [TypeOrmModule.forFeature([Place, SamePlace])],
     controllers: [PlacesController],
-    providers: [PlacesService, SamesService]
+    providers: [PlacesService, SamePlacesService]
 })
 export class PlacesModule {}
