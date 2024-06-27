@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SamePlacesService } from 'src/sames/sames.service';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { PlaceDTO } from './places.dto';
+import PlaceDTO from './places.dto';
 import { Between } from 'typeorm';
 import { Place } from './places.entity';
 import { SamePlace } from 'src/sames/sames.entity';
@@ -19,17 +19,17 @@ export class PlacesService {
     const samePlace: Place = await this.placesRepository.findOne({
       where: {
         category: dto.category,
-        latitude: Between(dto.latitude - 0.03, dto.latitude + 0.03),
-        longitude: Between(dto.longitude - 0.03, dto.longitude + 0.03)
+        latitude: Between(dto.latitude - 0.01, dto.latitude + 0.01),
+        longitude: Between(dto.longitude - 0.01, dto.longitude + 0.01)
       }
     });
-    if (samePlace) return await this.samesService.create(dto);
+    if (samePlace) return this.samesService.create(dto);
     const newPlace = this.placesRepository.create(dto);
-    return await this.placesRepository.save(newPlace);
+    return this.placesRepository.save(newPlace);
   }
 
   async getAll(): Promise<Place[]> {
-    return await this.placesRepository.find();
+    return await this.placesRepository.find(/* { where: { isChecked: true }} */);
   }
 
   async get(id: number): Promise<Place> {

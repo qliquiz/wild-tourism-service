@@ -15,10 +15,10 @@ export class SamePlace {
   @ApiProperty({ example: 'Красиво', description: 'Описание' })
   @Column({ type: 'varchar', length: 600, nullable: true })
   description: string;
-
+  
   @ApiProperty({ description: 'Фотографии' })
   @Column('text', { array: true, nullable: true })
-  photos: string[];
+  photos: Express.Multer.File[];
   
   @ApiProperty({ example: 'camping', description: 'Категория' })
   @Column({ type: 'varchar', length: 20, nullable: false, default: 'camping' })

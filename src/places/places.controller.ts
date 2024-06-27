@@ -1,18 +1,21 @@
 import { Controller, Get, Post, Body, Delete, Query, Put, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express/multer/interceptors/file-fields.interceptor';
 import { PlacesService } from './places.service';
-import { PlaceDTO } from './places.dto';
+import PlaceDTO from './places.dto';
 import { Place } from './places.entity';
 import { SamePlace } from 'src/sames/sames.entity';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('places')
 export class PlacesController {
   constructor(private readonly placesService: PlacesService) {}
 
   @Post()
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'photos', maxCount: 10 }]))
-  create(@UploadedFiles() files: { photos?: Express.Multer.File[] }, @Body() dto: PlaceDTO): Promise<Place | SamePlace> {
-    if (files.photos) dto.photos = files.photos.map(file => file.filename);
+  @UseInterceptors(FilesInterceptor('photos', 5))
+  async createPlace(@UploadedFiles() files: Array<Express.Multer.File>, @Body() dto: PlaceDTO) {
+    dto.latitude = parseFloat(dto.latitude as any);
+    dto.longitude = parseFloat(dto.longitude as any);
+    dto.photos = files;
     return this.placesService.create(dto);
   }
 

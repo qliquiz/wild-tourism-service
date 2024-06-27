@@ -18,7 +18,7 @@ export class Place {
 
   @ApiProperty({ description: 'Фотографии' })
   @Column('text', { array: true, nullable: true })
-  photos: string[];
+  photos: Express.Multer.File[];
   
   @ApiProperty({ example: 'camping', description: 'Категория' })
   @Column({ type: 'varchar', length: 20, nullable: false, default: 'camping' })

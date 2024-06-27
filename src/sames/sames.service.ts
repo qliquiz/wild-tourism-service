@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { PlaceDTO } from 'src/places/places.dto';
+import PlaceDTO from 'src/places/places.dto';
 import { SamePlace } from './sames.entity';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class SamePlacesService {
 
   async create(dto: PlaceDTO): Promise<SamePlace> {
     const newSamePlace = this.samesRepository.create(dto);
-    return await this.samesRepository.save(newSamePlace);
+    return this.samesRepository.save(newSamePlace);
   }
 
   async getAll(): Promise<SamePlace[]> {
