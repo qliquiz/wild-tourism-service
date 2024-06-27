@@ -32,6 +32,10 @@ export class Place {
   @Column({ type: 'float', default: 0.0 })
   longitude: number;
 
+  @ApiProperty({ example: 'true', description: 'Проверено модерацией' })
+  @Column({ default: false })
+  isChecked: boolean;
+
   @OneToMany(() => Same, (same) => same.place)
   sames: Same[];
 }

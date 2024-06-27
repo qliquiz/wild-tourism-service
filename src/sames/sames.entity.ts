@@ -32,6 +32,10 @@ export class Same {
   @Column({ type: 'float', default: 0.0 })
   longitude: number;
 
+  @ApiProperty({ example: 'true', description: 'Проверено модерацией' })
+  @Column({ default: false })
+  isChecked: boolean;
+
   @ManyToOne(() => Place, (place) => place.sames, { cascade: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   place: Place;
 }
