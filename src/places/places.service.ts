@@ -31,7 +31,7 @@ export class PlacesService {
   }
 
   async getAll(): Promise<Place[]> {
-    return await this.placesRepository.find(/* { where: { isChecked: true }} */);
+    return await this.placesRepository.find({ where: { isChecked: true }});
   }
 
   /* async get(id: number): Promise<Place> {
