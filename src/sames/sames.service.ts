@@ -13,6 +13,8 @@ export class SamePlacesService {
 
   async create(dto: PlaceDTO): Promise<SamePlace> {
     const newSamePlace = this.samesRepository.create(dto);
+    console.log('<SamePlace>');
+    console.log(newSamePlace);
     return this.samesRepository.save(newSamePlace);
   }
 

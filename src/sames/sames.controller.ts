@@ -13,7 +13,6 @@ export class SamePlacesController {
     return this.samesService.create(dto);
   }
 
-  @UseGuards(PasswordHeaderGuard)
   @Get()
   getAll(): Promise<SamePlace[]> {
     return this.samesService.getAll();
