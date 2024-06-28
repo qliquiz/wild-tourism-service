@@ -1,10 +1,9 @@
-import { Controller, Get, Post, Body, Delete, Query, Put, UseInterceptors, UploadedFiles } from '@nestjs/common';
-import { FileFieldsInterceptor } from '@nestjs/platform-express/multer/interceptors/file-fields.interceptor';
+import { Controller, Get, Post, Body, Delete, Query, Put, UseInterceptors, UploadedFiles, UseGuards } from '@nestjs/common';
 import { PlacesService } from './places.service';
 import PlaceDTO from './places.dto';
 import { Place } from './places.entity';
-import { SamePlace } from 'src/sames/sames.entity';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { PasswordHeaderGuard } from 'src/guard';
 
 @Controller('places')
 export class PlacesController {
@@ -24,16 +23,18 @@ export class PlacesController {
     return this.placesService.getAll();
   }
 
-  @Get()
+/*   @Get()
   get(@Query('id') id: string): Promise<Place> {
     return this.placesService.get(+id);
-  }
+  } */
 
+  @UseGuards(PasswordHeaderGuard)
   @Put()
   update(@Query('id') id: string, @Body() dto: PlaceDTO): Promise<Place> {
     return this.placesService.update(+id, dto);
   }
 
+  @UseGuards(PasswordHeaderGuard)
   @Delete()
   delete(@Query('id') id: string): Promise<void> {
     return this.placesService.delete(+id);

@@ -5,7 +5,7 @@ import { SamePlacesModule } from './sames/sames.module';
 import { Module } from '@nestjs/common';
 import { Place } from './places/places.entity';
 import { SamePlace } from './sames/sames.entity';
-import { FileUploadModule } from './file/file-upload.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { FileUploadModule } from './file/file-upload.module';
     }),
     PlacesModule,
     SamePlacesModule,
-    FileUploadModule
+    UploadModule
   ]
 })
 export class AppModule {}
