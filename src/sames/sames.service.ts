@@ -20,9 +20,9 @@ export class SamePlacesService {
     return await this.samesRepository.find();
   }
 
-  async get(id: number): Promise<SamePlace> {
+  /* async get(id: number): Promise<SamePlace> {
     return await this.samesRepository.findOneBy({ id });
-  }
+  } */
 
   async update(id: number, dto: PlaceDTO): Promise<SamePlace> {
     await this.samesRepository.update(id, dto);
